@@ -345,14 +345,20 @@
         if (nav && nav.contains(link)) setMenu(false);
       });
 
-      if (location.hash) {
-        var initialId = location.hash.slice(1);
-        if (optionalIds[initialId] && revealSection(initialId)) {
-          requestAnimationFrame(function () {
-            scrollToSection(document.getElementById(initialId), true);
-          });
-        }
+      function revealFromHash(instant) {
+        var id = location.hash.slice(1);
+        if (!optionalIds[id]) return;
+        var el = revealSection(id);
+        if (!el) return;
+        requestAnimationFrame(function () {
+          scrollToSection(el, instant);
+        });
       }
+
+      revealFromHash(true);
+      window.addEventListener('hashchange', function () {
+        revealFromHash(false);
+      });
     })();
   </script>
 </body>
