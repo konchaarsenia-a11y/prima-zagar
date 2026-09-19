@@ -837,6 +837,26 @@ p:last-child { margin-bottom: 0; }
   .gallery-item:nth-child(9) {
     display: none;
   }
+
+  /* Short mobile path: hero → why → results → book. Other sections stay in the menu. */
+  #process:not(.is-mobile-revealed),
+  #bride:not(.is-mobile-revealed),
+  #prices:not(.is-mobile-revealed),
+  #faq:not(.is-mobile-revealed),
+  #booking:not(.is-mobile-revealed) {
+    display: none;
+  }
+
+  #process,
+  #why,
+  #bride,
+  #prices,
+  #results,
+  #faq,
+  #booking,
+  #contacts {
+    scroll-margin-top: calc(var(--header-h) + 10px);
+  }
 }
 
 @media (max-width: 560px) {
