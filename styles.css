@@ -722,3 +722,44 @@ p:last-child { margin-bottom: 0; }
   .gallery-item img,
   .btn { transition: none; }
 }
+
+
+/* Dikidi booking embed */
+.booking .section-head {
+  margin-bottom: 1.75rem;
+}
+
+.booking-frame-wrap {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  min-height: 720px;
+}
+
+.booking-frame {
+  display: block;
+  width: 100%;
+  height: min(86vh, 900px);
+  border: 0;
+  background: #fff;
+}
+
+.booking-fallback {
+  margin: 1rem 0 0;
+  font-size: 0.92rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.booking-fallback a {
+  color: var(--bronze-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 560px) {
+  .booking-frame-wrap { min-height: 640px; }
+  .booking-frame { height: 70vh; min-height: 560px; }
+}
