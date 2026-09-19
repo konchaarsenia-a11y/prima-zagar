@@ -321,7 +321,14 @@ p:last-child { margin-bottom: 0; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 58% 18%;
+  /* Desktop: crop onto the model, not the empty stairs/wall */
+  object-position: 72% 42%;
+}
+
+@media (max-width: 780px) {
+  .hero-media img {
+    object-position: 62% 28%;
+  }
 }
 
 .hero-scrim {
