@@ -21,7 +21,7 @@
         <a href="#bride">Для невест</a>
         <a href="#prices">Цены</a>
         <a href="#faq">FAQ</a>
-        <a href="zapis.html">Заявка</a>
+        <a href="#booking">Заявка</a>
         <a href="#contacts">Контакты</a>
         <a class="nav-cta" href="zapis.html">Записаться</a>
         <a class="nav-secondary" href="https://t.me/prima_zagar" target="_blank" rel="noopener">Telegram</a>
@@ -269,6 +269,7 @@
       var toggle = document.getElementById('navToggle');
       var nav = document.getElementById('nav');
       var header = document.getElementById('siteHeader');
+      var optionalIds = { process: 1, bride: 1, prices: 1, faq: 1, booking: 1 };
 
       function onScroll() {
         if (!header) return;
@@ -277,23 +278,87 @@
       onScroll();
       window.addEventListener('scroll', onScroll, { passive: true });
 
+      function setMenu(open) {
+        if (!toggle || !nav) return;
+        nav.classList.toggle('is-open', open);
+        toggle.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.body.classList.toggle('nav-open', open);
+        if (header) header.classList.toggle('menu-open', open);
+      }
+
+      function revealSection(id) {
+        var el = document.getElementById(id);
+        if (!el) return null;
+        if (optionalIds[id]) el.classList.add('is-mobile-revealed');
+        return el;
+      }
+
+      function scrollToSection(el, instant) {
+        if (!el) return;
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        el.scrollIntoView({
+          behavior: instant || reduce ? 'auto' : 'smooth',
+          block: 'start'
+        });
+      }
+
+      function goToOptionalSection(id) {
+        var el = revealSection(id);
+        var wasOpen = nav && nav.classList.contains('is-open');
+        setMenu(false);
+        window.setTimeout(function () {
+          scrollToSection(el, false);
+          if (history.replaceState) history.replaceState(null, '', '#' + id);
+        }, wasOpen ? 80 : 0);
+      }
+
+      function samePageHash(href) {
+        var hashIdx = href.indexOf('#');
+        if (hashIdx === -1) return '';
+        var path = href.slice(0, hashIdx);
+        var id = href.slice(hashIdx + 1);
+        if (!id) return '';
+        var page = window.location.pathname.split('/').pop() || 'index.html';
+        var samePage = !path || path === page || path === 'index.html' || path === './index.html';
+        return samePage ? id : '';
+      }
+
       if (toggle && nav) {
-        function setMenu(open) {
-          nav.classList.toggle('is-open', open);
-          toggle.classList.toggle('is-open', open);
-          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-          document.body.classList.toggle('nav-open', open);
-          if (header) header.classList.toggle('menu-open', open);
-        }
         toggle.addEventListener('click', function () {
           setMenu(!nav.classList.contains('is-open'));
         });
-        nav.querySelectorAll('a').forEach(function (link) {
-          link.addEventListener('click', function () {
-            setMenu(false);
-          });
+      }
+
+      document.addEventListener('click', function (event) {
+        var link = event.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href') || '';
+        var id = samePageHash(href);
+
+        if (id && optionalIds[id]) {
+          event.preventDefault();
+          goToOptionalSection(id);
+          return;
+        }
+
+        if (nav && nav.contains(link)) setMenu(false);
+      });
+
+      function revealFromHash(instant) {
+        var id = location.hash.slice(1);
+        if (!optionalIds[id]) return;
+        var el = revealSection(id);
+        if (!el) return;
+        requestAnimationFrame(function () {
+          scrollToSection(el, instant);
         });
       }
+
+      revealFromHash(true);
+      window.addEventListener('hashchange', function () {
+        revealFromHash(false);
+      });
     })();
   </script>
 </body>
