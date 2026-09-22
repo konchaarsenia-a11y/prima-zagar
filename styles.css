@@ -775,7 +775,7 @@ p:last-child { margin-bottom: 0; }
   }
 
   .hero-brand {
-    top: calc(0.85rem + env(safe-area-inset-top));
+    top: calc(var(--header-h) + 0.15rem);
     font-size: 1.45rem;
     letter-spacing: 0.12em;
   }
