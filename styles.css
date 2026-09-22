@@ -220,18 +220,10 @@ p:last-child { margin-bottom: 0; }
 
 .site-header:not(.is-scrolled) .logo {
   color: var(--cream);
-  opacity: 0;
-  pointer-events: none;
 }
 
 .site-header:not(.is-scrolled) .logo span {
   color: var(--bronze);
-}
-
-.site-header.is-scrolled .logo {
-  opacity: 1;
-  pointer-events: auto;
-  transition: opacity 0.2s ease, color 0.2s;
 }
 
 .site-header:not(.is-scrolled) .nav a {
@@ -362,19 +354,7 @@ p:last-child { margin-bottom: 0; }
 
 
 .hero-brand {
-  position: absolute;
-  top: calc(var(--header-h) + 0.35rem);
-  left: 0;
-  right: 0;
-  z-index: 2;
-  margin: 0;
-  text-align: center;
-  font-family: var(--font-serif);
-  font-size: 1.85rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--cream);
-  pointer-events: none;
+  display: none;
 }
 
 .hero-brand span {
@@ -775,9 +755,31 @@ p:last-child { margin-bottom: 0; }
   }
 
   .hero-brand {
+    display: block;
+    position: absolute;
     top: calc(var(--header-h) + 0.15rem);
+    left: 0;
+    right: 0;
+    z-index: 2;
+    margin: 0;
+    text-align: center;
+    font-family: var(--font-serif);
     font-size: 2.05rem;
+    font-weight: 600;
     letter-spacing: 0.14em;
+    color: var(--cream);
+    pointer-events: none;
+  }
+
+  .site-header:not(.is-scrolled):not(.menu-open) .logo {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .site-header.is-scrolled .logo,
+  .site-header.menu-open .logo {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .hero-scrim {
