@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Заявка на загар — PRIMA ZAGAR | Минск, Немига</title>
-  <meta name="description" content="Оставьте заявку на моментальный загар: студия у м. Немига или выезд на дом. Подтвердим время в Telegram." />
+  <meta name="description" content="Заявка на моментальный загар: контакты и желаемое время. Студия свяжется и подберёт свободный слот." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -40,7 +40,7 @@
         <header class="section-head zayavka-head">
           <p class="eyebrow">Заявка</p>
           <h1>Оставьте заявку</h1>
-          <p class="section-sub">Напишите удобный день и формат — студия у Немиги или выезд. Мы ответим в Telegram и подтвердим время.</p>
+          <p class="section-sub">Укажите контакты и <strong>желаемые</strong> дату и время — это пожелание, не бронь. Мы свяжемся, сверим свободные окна в расписании и подберём подходящий слот.</p>
         </header>
 
         <div class="zayavka-card" id="zayavkaCard">
@@ -68,6 +68,7 @@
                 <input id="time" name="time" type="text" maxlength="60" placeholder="14:00 или после 16" />
               </div>
             </div>
+            <p class="field-hint field-hint-block">Это пожелание по времени. С вами свяжутся и подберут свободный слот — запись в расписание подтверждается студией.</p>
 
             <fieldset class="field field-service">
               <legend>Формат</legend>
@@ -218,18 +219,25 @@
 
       function buildMessage() {
         var lines = [
-          'Заявка на моментальный загар',
+          'Новая заявка — Prima Zagar',
           '',
           'Имя: ' + nameInput.value.trim(),
           'Телефон: ' + formatPhone(phoneInput.value),
-          'Дата: ' + formatDate(dateInput.value),
-          'Время: ' + (timeInput.value.trim() || 'не указано'),
+          'Желаемая дата: ' + formatDate(dateInput.value),
+          'Желаемое время: ' + (timeInput.value.trim() || 'не указано'),
           'Формат: ' + selectedService()
         ];
         var notes = notesInput.value.trim();
         if (notes) {
           lines.push('Комментарий: ' + notes);
         }
+        lines.push(
+          '',
+          'Дата и время — пожелание, не бронь.',
+          'Связаться, сверить расписание и подтвердить слот.',
+          '',
+          'Источник: сайт (zapis)'
+        );
         return lines.join('\n');
       }
 

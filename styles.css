@@ -996,6 +996,11 @@ body.page-inner .site-header:not(.is-scrolled) .header-cta.btn-sm {
   color: var(--muted);
 }
 
+.field-hint-block {
+  margin: -0.35rem 0 1rem;
+  grid-column: 1 / -1;
+}
+
 .field-hint {
   margin: 0;
   font-size: 0.8rem;
