@@ -809,21 +809,28 @@ p:last-child { margin-bottom: 0; }
     padding: 0.75rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom));
     background: var(--cream);
     transform: translate3d(100%, 0, 0);
-    transition: transform 0.28s ease;
+    transition: transform 0.28s ease, visibility 0.28s;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
+    pointer-events: none;
+    visibility: hidden;
   }
 
   .nav.is-open {
     transform: translate3d(0, 0, 0);
+    pointer-events: auto;
+    visibility: visible;
   }
 
   .nav a {
-    padding: 0.95rem 0.35rem;
+    display: block;
+    padding: 1.05rem 0.5rem;
     font-size: 1.08rem;
     border-bottom: 1px solid var(--line);
     color: var(--ink-soft) !important;
+    -webkit-tap-highlight-color: rgba(139, 111, 78, 0.2);
+    touch-action: manipulation;
   }
 
   .nav a.nav-cta {
@@ -865,11 +872,16 @@ p:last-child { margin-bottom: 0; }
 
   .header-cta { display: none; }
 
+  html.nav-open,
   body.nav-open {
     overflow: hidden;
-    position: fixed;
+    overscroll-behavior: none;
+    touch-action: none;
+  }
+
+  body.nav-open {
+    /* keep document scroll position — do NOT use position:fixed (breaks taps after close) */
     width: 100%;
-    height: 100%;
   }
 
   .section {

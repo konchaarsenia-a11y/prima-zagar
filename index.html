@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260922c" />
+  <link rel="stylesheet" href="styles.css?v=20260922d" />
 </head>
 <body>
   <header class="site-header" id="siteHeader">
@@ -260,6 +260,7 @@
       var nav = document.getElementById('nav');
       var header = document.getElementById('siteHeader');
       var optionalIds = { process: 1, bride: 1, prices: 1, faq: 1 };
+      var menuOpen = false;
 
       function onScroll() {
         if (!header) return;
@@ -270,11 +271,13 @@
 
       function setMenu(open) {
         if (!toggle || !nav) return;
-        nav.classList.toggle('is-open', open);
-        toggle.classList.toggle('is-open', open);
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        document.body.classList.toggle('nav-open', open);
-        if (header) header.classList.toggle('menu-open', open);
+        menuOpen = !!open;
+        nav.classList.toggle('is-open', menuOpen);
+        toggle.classList.toggle('is-open', menuOpen);
+        toggle.setAttribute('aria-expanded', menuOpen ? 'true' : 'false');
+        document.documentElement.classList.toggle('nav-open', menuOpen);
+        document.body.classList.toggle('nav-open', menuOpen);
+        if (header) header.classList.toggle('menu-open', menuOpen);
       }
 
       function revealSection(id) {
@@ -293,14 +296,14 @@
         });
       }
 
-      function goToOptionalSection(id) {
+      function goToHashSection(id) {
         var el = revealSection(id);
-        var wasOpen = nav && nav.classList.contains('is-open');
         setMenu(false);
+        // wait until menu unlocks scroll / pointer-events
         window.setTimeout(function () {
           scrollToSection(el, false);
           if (history.replaceState) history.replaceState(null, '', '#' + id);
-        }, wasOpen ? 80 : 0);
+        }, 120);
       }
 
       function samePageHash(href) {
@@ -310,34 +313,43 @@
         var id = href.slice(hashIdx + 1);
         if (!id) return '';
         var page = window.location.pathname.split('/').pop() || 'index.html';
-        var samePage = !path || path === page || path === 'index.html' || path === './index.html';
+        if (!page || page.indexOf('.') === -1) page = 'index.html';
+        var samePage = !path || path === page || path === 'index.html' || path === './index.html' || path === '/';
         return samePage ? id : '';
       }
 
       if (toggle && nav) {
-        toggle.addEventListener('click', function () {
-          setMenu(!nav.classList.contains('is-open'));
+        toggle.addEventListener('click', function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          setMenu(!menuOpen);
         });
       }
 
-      document.addEventListener('click', function (event) {
-        var link = event.target.closest('a[href]');
-        if (!link) return;
-        var href = link.getAttribute('href') || '';
-        var id = samePageHash(href);
+      if (nav) {
+        nav.addEventListener('click', function (event) {
+          var link = event.target.closest('a[href]');
+          if (!link || !nav.contains(link)) return;
 
-        if (id && optionalIds[id]) {
-          event.preventDefault();
-          goToOptionalSection(id);
-          return;
-        }
+          var href = link.getAttribute('href') || '';
+          var id = samePageHash(href);
 
-        if (nav && nav.contains(link)) setMenu(false);
-      });
+          // in-page anchors (including hidden sections)
+          if (id) {
+            event.preventDefault();
+            event.stopPropagation();
+            goToHashSection(id);
+            return;
+          }
+
+          // external / other pages — close menu, let navigation proceed
+          setMenu(false);
+        });
+      }
 
       function revealFromHash(instant) {
         var id = location.hash.slice(1);
-        if (!optionalIds[id]) return;
+        if (!id) return;
         var el = revealSection(id);
         if (!el) return;
         requestAnimationFrame(function () {
