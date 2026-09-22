@@ -842,8 +842,7 @@ p:last-child { margin-bottom: 0; }
   #process:not(.is-mobile-revealed),
   #bride:not(.is-mobile-revealed),
   #prices:not(.is-mobile-revealed),
-  #faq:not(.is-mobile-revealed),
-  #booking:not(.is-mobile-revealed) {
+  #faq:not(.is-mobile-revealed) {
     display: none;
   }
 
