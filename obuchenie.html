@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260923d" />
+  <link rel="stylesheet" href="styles.css?v=20260923e" />
 </head>
 <body class="page-inner page-obuchenie">
   <header class="site-header is-scrolled" id="siteHeader">
@@ -102,10 +102,39 @@
           <p>По окончании — именной сертификат гособразца. Единственный такой в стране.</p>
 
           <h2>Готовы учиться?</h2>
-          <p>Напишите в Telegram — расскажем ближайшие даты и ответим на вопросы.</p>
-          <div class="obuchenie-actions">
-            <a class="btn btn-primary" href="https://t.me/prima_zagar" target="_blank" rel="noopener">Написать в Telegram</a>
-            <a class="btn btn-outline" href="index.html">На главную</a>
+          <p>Оставьте заявку — она уйдёт в Telegram студии. Подскажем ближайшие даты и ответим на вопросы.</p>
+
+          <div class="zayavka-card obuchenie-lead" id="leadCard" style="margin-top:1.25rem;max-width:none;padding:0;border:none;background:transparent">
+            <form class="zayavka-form" id="leadForm" novalidate>
+              <div class="field">
+                <label for="name">Имя</label>
+                <input id="name" name="name" type="text" autocomplete="name" required maxlength="80" placeholder="Как к Вам обращаться" />
+                <p class="field-error" id="nameError" hidden>Напишите, как к Вам обращаться.</p>
+              </div>
+              <div class="field">
+                <label for="phone">Телефон</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="24" placeholder="+375 29 000-00-00" />
+                <p class="field-error" id="phoneError" hidden>Укажите номер в формате +375 XX XXX-XX-XX.</p>
+              </div>
+              <div class="field">
+                <label for="notes">Комментарий <span class="optional">необязательно</span></label>
+                <textarea id="notes" name="notes" rows="3" maxlength="500" placeholder="Удобные даты, вопросы про рассрочку"></textarea>
+              </div>
+              <button class="btn btn-primary" type="submit">Отправить заявку в Telegram</button>
+              <p class="form-note">
+                Откроется чат
+                <a class="text-link" href="https://t.me/prima_zagar" target="_blank" rel="noopener">Telegram</a>
+                с готовым текстом — останется нажать «Отправить».
+              </p>
+            </form>
+            <div class="zayavka-success" id="leadSuccess" hidden tabindex="-1">
+              <p class="eyebrow">Готово</p>
+              <h2>Заявка собрана</h2>
+              <p>Если Telegram не открылся сам, нажмите ссылку ниже — сообщение уже заполнено, останется только отправить.</p>
+              <a class="btn btn-primary" id="telegramFallback" href="https://t.me/prima_zagar" target="_blank" rel="noopener">Написать в Telegram</a>
+              <button class="btn btn-outline" type="button" id="anotherRequest">Ещё одна заявка</button>
+              <a class="btn btn-outline" href="index.html">На главную</a>
+            </div>
           </div>
         </div>
       </div>
@@ -131,19 +160,105 @@
     (function () {
       var toggle = document.getElementById('navToggle');
       var nav = document.getElementById('nav');
-      var menuOpen = false;
+      var header = document.getElementById('siteHeader');
       function setMenu(open) {
         if (!toggle || !nav) return;
-        menuOpen = !!open;
-        nav.classList.toggle('is-open', menuOpen);
-        toggle.classList.toggle('is-open', menuOpen);
-        toggle.setAttribute('aria-expanded', menuOpen ? 'true' : 'false');
-        document.body.classList.toggle('nav-open', menuOpen);
+        nav.classList.toggle('is-open', open);
+        toggle.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.documentElement.classList.toggle('nav-open', open);
+        document.body.classList.toggle('nav-open', open);
+        if (header) header.classList.toggle('menu-open', open);
       }
-      if (toggle) toggle.addEventListener('click', function () { setMenu(!menuOpen); });
+      if (toggle) toggle.addEventListener('click', function () {
+        setMenu(!nav.classList.contains('is-open'));
+      });
       if (nav) nav.querySelectorAll('a').forEach(function (a) {
         a.addEventListener('click', function () { setMenu(false); });
       });
+
+      var form = document.getElementById('leadForm');
+      var success = document.getElementById('leadSuccess');
+      var fallback = document.getElementById('telegramFallback');
+      var another = document.getElementById('anotherRequest');
+      var nameInput = document.getElementById('name');
+      var phoneInput = document.getElementById('phone');
+      var notesInput = document.getElementById('notes');
+      var nameError = document.getElementById('nameError');
+      var phoneError = document.getElementById('phoneError');
+      if (!form) return;
+
+      function digitsOnly(value) {
+        return String(value || '').replace(/\D/g, '');
+      }
+      function isValidByPhone(value) {
+        var digits = digitsOnly(value);
+        if (digits.indexOf('375') === 0) return digits.length === 12;
+        if (digits.indexOf('80') === 0) return digits.length === 11;
+        return /^(25|29|33|44)\d{7}$/.test(digits);
+      }
+      function formatPhone(value) {
+        var digits = digitsOnly(value);
+        if (digits.indexOf('80') === 0 && digits.length >= 11) {
+          digits = '375' + digits.slice(2, 11);
+        } else if (/^(25|29|33|44)/.test(digits) && digits.length === 9) {
+          digits = '375' + digits;
+        }
+        if (digits.indexOf('375') === 0 && digits.length >= 12) {
+          digits = digits.slice(0, 12);
+          return '+375 ' + digits.slice(3, 5) + ' ' + digits.slice(5, 8) + '-' + digits.slice(8, 10) + '-' + digits.slice(10, 12);
+        }
+        return String(value || '').trim();
+      }
+      function buildMessage() {
+        var lines = [
+          'Новая заявка — обучение Prima Zagar',
+          '',
+          'Имя: ' + nameInput.value.trim(),
+          'Телефон: ' + formatPhone(phoneInput.value)
+        ];
+        var notes = notesInput.value.trim();
+        if (notes) lines.push('Комментарий: ' + notes);
+        lines.push('', 'Источник: сайт (obuchenie)');
+        return lines.join('\n');
+      }
+      function telegramUrl(text) {
+        return 'https://t.me/prima_zagar?text=' + encodeURIComponent(text);
+      }
+      function setFieldState(input, errorEl, ok) {
+        input.classList.toggle('is-invalid', !ok);
+        input.setAttribute('aria-invalid', ok ? 'false' : 'true');
+        if (errorEl) errorEl.hidden = ok;
+      }
+      function validate() {
+        var nameOk = nameInput.value.trim().length >= 2;
+        var phoneOk = isValidByPhone(phoneInput.value);
+        setFieldState(nameInput, nameError, nameOk);
+        setFieldState(phoneInput, phoneError, phoneOk);
+        return nameOk && phoneOk;
+      }
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (!validate()) {
+          var firstInvalid = form.querySelector('.is-invalid');
+          if (firstInvalid) firstInvalid.focus();
+          return;
+        }
+        var url = telegramUrl(buildMessage());
+        fallback.href = url;
+        form.hidden = true;
+        success.hidden = false;
+        success.focus();
+        window.open(url, '_blank', 'noopener');
+      });
+      if (another) {
+        another.addEventListener('click', function () {
+          form.reset();
+          form.hidden = false;
+          success.hidden = true;
+          nameInput.focus();
+        });
+      }
     })();
   </script>
 </body>
