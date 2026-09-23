@@ -295,14 +295,6 @@
         }
         submitWithFastUi(buildPayload(), telegramUrl(buildMessage()));
       });
-      if (another) {
-        another.addEventListener('click', function () {
-          form.reset();
-          form.hidden = false;
-          success.hidden = true;
-          nameInput.focus();
-        });
-      }
     })();
   </script>
 </body>
