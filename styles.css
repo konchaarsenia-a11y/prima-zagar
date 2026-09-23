@@ -935,7 +935,12 @@ p:last-child { margin-bottom: 0; }
     background: var(--ink);
   }
 
+  /* Fixed header: pad only inner pages. Home hero goes under the header — no cream strip. */
   main {
+    padding-top: 0;
+  }
+
+  body.page-inner main {
     padding-top: var(--header-h);
   }
 
