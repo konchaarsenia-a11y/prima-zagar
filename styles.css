@@ -1502,15 +1502,20 @@ body.page-inner .site-header:not(.is-scrolled) .header-cta.btn-sm {
 }
 
 .zayavka-success h2 {
-  margin: 1rem 0 0;
-  font-size: clamp(1.45rem, 3.2vw, 1.85rem);
+  margin: 1.75rem 0 0;
+  font-size: clamp(1.2rem, 2.6vw, 1.5rem);
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1.25;
+  letter-spacing: 0;
+  color: var(--ink-soft);
 }
 
 .zayavka-success p {
-  margin: 0 0 0.4rem;
+  margin: 0 0 0.55rem;
   color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  max-width: 32em;
 }
 
 .zayavka-success .btn {
