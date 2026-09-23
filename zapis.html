@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260923n" />
+  <link rel="stylesheet" href="styles.css?v=20260923o" />
 </head>
 <body class="page-inner">
   <header class="site-header is-scrolled" id="siteHeader">
@@ -271,8 +271,8 @@
         success.focus();
       }
 
-      function sendLead() {
-        var payload = {
+      function buildPayload() {
+        return {
           action: 'submitPrimaZagarLead',
           type: 'zapis',
           name: nameInput.value.trim(),
@@ -283,15 +283,43 @@
           comment: notesInput.value.trim(),
           source: 'сайт (zapis)'
         };
+      }
+
+      function sendLead(payload) {
         return fetch(LEAD_URL, {
           method: 'POST',
           redirect: 'follow',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload)
-        }).then(function () {
-          return true;
+          body: JSON.stringify(payload),
+          keepalive: true
+        });
+      }
+
+      function submitWithFastUi(payload, backup) {
+        if (fallback) fallback.href = backup;
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Отправляем…';
+        }
+        var settled = false;
+        function finish(ok) {
+          if (settled) return;
+          settled = true;
+          showSuccess(ok);
+          if (!ok) window.open(backup, '_blank', 'noopener');
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Отправить заявку';
+          }
+        }
+        /* Apps Script often answers in 10–15s; Telegram is already delivered earlier. */
+        var uiTimer = setTimeout(function () { finish(true); }, 700);
+        sendLead(payload).then(function () {
+          clearTimeout(uiTimer);
+          finish(true);
         }).catch(function () {
-          return false;
+          clearTimeout(uiTimer);
+          finish(false);
         });
       }
 
@@ -302,25 +330,7 @@
           if (firstInvalid) firstInvalid.focus();
           return;
         }
-        var backup = telegramUrl(buildMessage());
-        if (fallback) fallback.href = backup;
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'Отправляем…';
-        }
-        sendLead().then(function (ok) {
-          if (ok) {
-            showSuccess(true);
-          } else {
-            showSuccess(false);
-            window.open(backup, '_blank', 'noopener');
-          }
-        }).finally(function () {
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Отправить заявку';
-          }
-        });
+        submitWithFastUi(buildPayload(), telegramUrl(buildMessage()));
       });
 
       nameInput.addEventListener('input', function () {
