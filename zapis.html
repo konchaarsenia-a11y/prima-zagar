@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260923r" />
+  <link rel="stylesheet" href="styles.css?v=20260923s" />
 </head>
 <body class="page-inner">
   <header class="site-header is-scrolled" id="siteHeader">
@@ -102,8 +102,11 @@
             <h2>Заявка отправлена</h2>
             <p id="successText">Мы получили заявку в Telegram. Свяжемся, сверим расписание и подтвердим слот.</p>
             <a class="btn btn-primary" id="telegramFallback" href="https://t.me/prima_zagar" target="_blank" rel="noopener" hidden>Написать в Telegram</a>
-            <a class="btn btn-outline" href="https://www.instagram.com/prima_zagar/" target="_blank" rel="noopener">Instagram</a>
-            <button class="btn btn-outline" type="button" id="anotherRequest">Ещё одна заявка</button>
+            <div class="zayavka-success-actions">
+              <a class="btn btn-outline" href="https://www.instagram.com/prima_zagar/" target="_blank" rel="noopener">Instagram</a>
+              <a class="btn btn-outline" href="https://yandex.ru/maps/org/yubileyny/1193705094/" target="_blank" rel="noopener">Показать на картах</a>
+              <a class="btn btn-outline" href="index.html">На главную</a>
+            </div>
           </div>
         </div>
       </div>
@@ -159,7 +162,6 @@
       var form = document.getElementById('bookingForm');
       var success = document.getElementById('bookingSuccess');
       var fallback = document.getElementById('telegramFallback');
-      var another = document.getElementById('anotherRequest');
       var nameInput = document.getElementById('name');
       var phoneInput = document.getElementById('phone');
       var dateInput = document.getElementById('date');
@@ -342,18 +344,6 @@
         if (phoneInput.classList.contains('is-invalid')) {
           setFieldState(phoneInput, phoneError, isValidByPhone(phoneInput.value));
         }
-      });
-
-      another.addEventListener('click', function () {
-        success.hidden = true;
-        form.hidden = false;
-        form.reset();
-        form.querySelector('input[name="service"]').checked = true;
-        nameInput.classList.remove('is-invalid');
-        phoneInput.classList.remove('is-invalid');
-        nameError.hidden = true;
-        phoneError.hidden = true;
-        nameInput.focus();
       });
     })();
   </script>

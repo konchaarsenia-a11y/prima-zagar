@@ -1518,6 +1518,18 @@ body.page-inner .site-header:not(.is-scrolled) .header-cta.btn-sm {
   max-width: 32em;
 }
 
+.zayavka-success-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.zayavka-success-actions .btn {
+  width: 100%;
+}
+
 .zayavka-success .btn {
   width: 100%;
 }
