@@ -116,6 +116,10 @@ p:last-child { margin-bottom: 0; }
   color: var(--bronze);
 }
 
+.section-dark p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
 .section-dark .section-sub {
   color: rgba(250, 247, 242, 0.65);
 }
@@ -512,6 +516,99 @@ p:last-child { margin-bottom: 0; }
   max-width: 36em;
 }
 
+
+.bride-copy .btn {
+  margin-top: 1.25rem;
+}
+
+.bride-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  flex: 1 1 320px;
+  max-width: 420px;
+}
+
+.bride-photo {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #1a1815;
+  aspect-ratio: 3 / 4;
+}
+
+.bride-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.training-teaser-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.training-teaser-copy {
+  max-width: 640px;
+}
+
+.training-teaser-copy h2 {
+  margin-bottom: 0.65rem;
+}
+
+.training-teaser-copy p:not(.eyebrow) {
+  margin: 0;
+  color: var(--muted-on-dark, rgba(255,255,255,0.72));
+  max-width: 36em;
+}
+
+.page-obuchenie .obuchenie-card {
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 4px);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+.obuchenie-card h2 {
+  margin: 1.75rem 0 0.75rem;
+  font-size: 1.45rem;
+}
+
+.obuchenie-card h2:first-of-type {
+  margin-top: 0;
+}
+
+.obuchenie-card ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+}
+
+.obuchenie-card li {
+  margin: 0.4rem 0;
+}
+
+.obuchenie-price {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  font-weight: 600;
+  margin: 0.35rem 0 0.5rem;
+  color: var(--ink);
+}
+
+.obuchenie-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
 /* Prices — typography-heavy, airy, no fake BYN */
 .prices .price-formats {
   display: grid;
@@ -522,11 +619,10 @@ p:last-child { margin-bottom: 0; }
 }
 
 .price-line {
-  display: grid;
-  grid-template-columns: minmax(140px, 200px) 1fr;
-  gap: 1rem 2rem;
-  align-items: baseline;
-  padding: 1.6rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.35rem 0;
   border-top: 1px solid var(--line);
   background: transparent;
 }
@@ -535,16 +631,32 @@ p:last-child { margin-bottom: 0; }
   border-bottom: 1px solid var(--line);
 }
 
+.price-line-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .price-line h3 {
   margin: 0;
-  font-size: 1.55rem;
+  font-size: 1.45rem;
   color: var(--ink);
 }
 
-.price-line p {
+.price-amount {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.price-line > p {
   margin: 0;
   color: var(--muted);
-  font-size: 1.02rem;
+  font-size: 0.98rem;
 }
 
 .prices-cta {
@@ -951,6 +1063,8 @@ p:last-child { margin-bottom: 0; }
   }
 
   .bride-inner { flex-direction: column; align-items: flex-start; }
+  .bride-photos { max-width: 100%; width: 100%; }
+  .training-teaser-inner { flex-direction: column; align-items: flex-start; }
   .cta-band-inner { flex-direction: column; align-items: flex-start; }
   .footer-inner { grid-template-columns: 1fr; }
 

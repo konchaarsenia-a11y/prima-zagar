@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Обучение моментальному загару — PRIMA ZAGAR | Минск</title>
+  <meta name="description" content="Индивидуальный базовый курс моментального загара: 2 дня, теория и практика, рассрочка, именной сертификат гособразца. Стоимость 1200 BYN." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=20260923a" />
+</head>
+<body class="page-inner page-obuchenie">
+  <header class="site-header is-scrolled" id="siteHeader">
+    <div class="header-inner">
+      <a class="logo" href="index.html">PRIMA <span>ZAGAR</span></a>
+      <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="index.html#why">Почему мы</a>
+        <a href="index.html#prices">Цены</a>
+        <a href="index.html#faq">Вопросы</a>
+        <a href="obuchenie.html" aria-current="page">Обучение</a>
+        <a href="zapis.html">Заявка</a>
+        <a href="index.html#contacts">Контакты</a>
+        <a class="nav-cta" href="zapis.html">Записаться</a>
+        <a class="nav-secondary" href="https://t.me/prima_zagar" target="_blank" rel="noopener">Telegram</a>
+        <a class="nav-secondary" href="https://www.instagram.com/prima_zagar/" target="_blank" rel="noopener">Instagram</a>
+      </nav>
+      <a class="btn btn-sm header-cta" href="zapis.html">Записаться</a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section section-cream">
+      <div class="container">
+        <header class="section-head" style="max-width:720px;margin-left:auto;margin-right:auto;text-align:left">
+          <p class="eyebrow">Обучение</p>
+          <h1>Базовый курс моментального загара</h1>
+          <p class="section-sub">Индивидуальное обучение для тех, кто хочет освоить профессию и работать с клиентами уверенно — с готовыми материалами, гайдами и поддержкой.</p>
+        </header>
+
+        <div class="obuchenie-card">
+          <h2>Стоимость</h2>
+          <p class="obuchenie-price">1200 BYN</p>
+          <p>Для Вашего комфорта обучение можно оплатить в рассрочку от 3 до 6 месяцев без переплат и первоначального взноса.</p>
+
+          <h2>Формат</h2>
+          <ul>
+            <li>Обучение индивидуальное</li>
+            <li>Длится 2 дня: теория и практика</li>
+            <li>Все материалы и оборудование предоставляются</li>
+            <li>Методическое пособие в электронном виде</li>
+            <li>Подробный гайд по лосьонам для моментального загара</li>
+          </ul>
+
+          <h2>Чему научитесь</h2>
+          <ul>
+            <li>Базовые знания в сфере моментального загара</li>
+            <li>Практические фишки мастера</li>
+            <li>Как закупиться материалами и оборудованием на сумму около 2000$, не вкладывая собственных средств</li>
+            <li>Ссылки на магазины, где можно купить продукцию</li>
+          </ul>
+
+          <h2>Сертификат</h2>
+          <p>Выдаём единственный в стране именной сертификат гособразца.</p>
+
+          <div class="obuchenie-actions">
+            <a class="btn btn-primary" href="https://t.me/prima_zagar" target="_blank" rel="noopener">Написать про обучение</a>
+            <a class="btn btn-outline" href="https://www.instagram.com/prima_zagar/" target="_blank" rel="noopener">Instagram</a>
+            <a class="btn btn-outline" href="index.html">На главную</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contacts">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a class="logo" href="index.html">PRIMA <span>ZAGAR</span></a>
+        <p>Студия моментального загара · пр.&nbsp;Победителей,&nbsp;19 · м.&nbsp;Немига</p>
+      </div>
+      <div class="footer-links">
+        <a href="obuchenie.html">Обучение</a>
+        <a href="zapis.html">Заявка</a>
+        <a href="https://t.me/prima_zagar" target="_blank" rel="noopener">Telegram</a>
+        <a href="https://www.instagram.com/prima_zagar/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var toggle = document.getElementById('navToggle');
+      var nav = document.getElementById('nav');
+      var menuOpen = false;
+      function setMenu(open) {
+        if (!toggle || !nav) return;
+        menuOpen = !!open;
+        nav.classList.toggle('is-open', menuOpen);
+        toggle.classList.toggle('is-open', menuOpen);
+        toggle.setAttribute('aria-expanded', menuOpen ? 'true' : 'false');
+        document.body.classList.toggle('nav-open', menuOpen);
+      }
+      if (toggle) toggle.addEventListener('click', function () { setMenu(!menuOpen); });
+      if (nav) nav.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { setMenu(false); });
+      });
+    })();
+  </script>
+</body>
+</html>
