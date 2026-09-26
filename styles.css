@@ -1645,3 +1645,40 @@ body.page-inner .site-header:not(.is-scrolled) .header-cta.btn-sm {
   font-size: 1.05rem;
   max-width: 36em;
 }
+
+/* Training lead form: flat (no card chrome) while the form is visible… */
+.obuchenie-lead {
+  margin-top: 1.25rem;
+  max-width: none;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+/* …but after submit the «Заявка отправлена» card matches zapis.html 1:1:
+   same outer width (640px, or the full container width on narrow screens —
+   i.e. breaking out of .obuchenie-card padding + border), same padding,
+   border and background as .zayavka-card. */
+.obuchenie-lead:has(.zayavka-form[hidden]) {
+  --lead-success-w: min(640px, calc(100% + 2 * clamp(1.5rem, 4vw, 2.25rem) + 2px));
+  width: var(--lead-success-w);
+  max-width: none;
+  margin-inline: calc((100% - var(--lead-success-w)) / 2);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  padding-top: 0;
+  background: var(--card);
+  border: 1px solid var(--line);
+}
+
+/* The training message is shorter than the zapis one; reserve the same number
+   of text lines zapis.html uses (2 lines, 3 on phones < 400px) so the card
+   height matches too. */
+.obuchenie-lead .zayavka-success p {
+  min-height: calc(2 * 1.45em);
+}
+
+@media (max-width: 399px) {
+  .obuchenie-lead .zayavka-success p {
+    min-height: calc(3 * 1.45em);
+  }
+}
