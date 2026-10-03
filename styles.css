@@ -1398,6 +1398,41 @@ body.page-inner .site-header:not(.is-scrolled) .header-cta.btn-sm {
   color: #8a3b2a;
 }
 
+.field .consent-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.92rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.consent-label input[type="checkbox"] {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: 0.15rem 0 0;
+  padding: 0;
+  flex-shrink: 0;
+  accent-color: var(--bronze-deep);
+}
+
+.consent-label a {
+  color: var(--bronze-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.consent-label a:hover {
+  color: var(--ink);
+}
+
+.consent-label input.is-invalid {
+  outline: 2px solid #8a3b2a;
+  outline-offset: 2px;
+}
+
 .field-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1545,10 +1580,32 @@ body.page-inner .site-header:not(.is-scrolled) .header-cta.btn-sm {
   width: 100%;
 }
 
-.footer-note a {
+.footer-note a,
+.footer-legal a {
   color: var(--bronze);
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+.footer-legal a:hover {
+  color: var(--cream);
+}
+
+.footer-legal {
+  grid-column: 1 / -1;
+  margin: 0.35rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(244, 237, 227, 0.08);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.footer-legal p {
+  margin: 0;
+  overflow-wrap: anywhere;
 }
 
 @media (max-width: 560px) {
@@ -1681,4 +1738,73 @@ body.page-inner .site-header:not(.is-scrolled) .header-cta.btn-sm {
   .obuchenie-lead .zayavka-success p {
     min-height: calc(3 * 1.45em);
   }
+}
+
+/* Privacy policy */
+.policy {
+  max-width: 720px;
+}
+
+.policy-head {
+  text-align: left;
+  max-width: none;
+  margin: 0 0 2rem;
+}
+
+.policy h1 {
+  font-size: clamp(2.15rem, 4.6vw, 3.15rem);
+}
+
+.policy h2 {
+  font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+  margin: 2rem 0 0.75rem;
+}
+
+.policy p,
+.policy li {
+  color: var(--ink-soft);
+}
+
+.policy a {
+  color: var(--bronze-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.policy a:hover {
+  color: var(--ink);
+}
+
+.policy-details,
+.policy-points {
+  margin: 0 0 1em;
+  padding: 0;
+}
+
+.policy-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.policy-details li,
+.policy-points li {
+  margin: 0;
+}
+
+.policy-points {
+  list-style: disc;
+  padding-left: 1.2rem;
+}
+
+.policy-points li {
+  margin: 0.35rem 0;
+}
+
+.policy-date {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.95rem;
 }
