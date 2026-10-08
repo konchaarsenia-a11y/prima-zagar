@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261003a" />
+  <link rel="stylesheet" href="styles.css?v=20261008a" />
   <!-- deploy 20260926a -->
 </head>
 <body class="page-inner page-obuchenie">
@@ -89,8 +89,8 @@
             <p>По окончании курса Вы получаете именной сертификат государственного образца — единственный такой в стране.</p>
           </div>
 
-          <h2 id="zayavka-obuchenie">Готовы учиться?</h2>
-          <p>Оставьте заявку — она сразу уйдёт менеджеру студии. Подскажем ближайшие даты и ответим на вопросы.</p>
+          <h2 class="lead-invite" id="zayavka-obuchenie">Готовы учиться?</h2>
+          <p class="lead-invite">Оставьте заявку — она сразу уйдёт менеджеру студии. Подскажем ближайшие даты и ответим на вопросы.</p>
 
           <div class="zayavka-card obuchenie-lead" id="leadCard">
             <form class="zayavka-form" id="leadForm" novalidate>
@@ -247,6 +247,11 @@
       function showSuccess(viaBot) {
         form.hidden = true;
         success.hidden = false;
+        /* «Готовы учиться?» asks for the form. The course header stays.
+           Nothing on this page returns to the form, so the invite stays hidden. */
+        document.querySelectorAll('.lead-invite').forEach(function (el) {
+          el.hidden = true;
+        });
         if (successText) {
           successText.textContent = viaBot
             ? 'Мы получили заявку в Telegram и скоро ответим.'

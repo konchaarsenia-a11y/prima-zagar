@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261003a" />
+  <link rel="stylesheet" href="styles.css?v=20261008a" />
 </head>
 <body class="page-inner">
   <header class="site-header is-scrolled" id="siteHeader">
@@ -177,6 +177,7 @@
 
       var form = document.getElementById('bookingForm');
       var success = document.getElementById('bookingSuccess');
+      var head = document.querySelector('.zayavka-head');
       var fallback = document.getElementById('telegramFallback');
       var nameInput = document.getElementById('name');
       var phoneInput = document.getElementById('phone');
@@ -283,6 +284,9 @@
       function showSuccess(viaBot) {
         form.hidden = true;
         success.hidden = false;
+        /* Heading and fill-in instructions belong with the form.
+           Nothing on this page returns to the form, so they stay hidden. */
+        if (head) head.hidden = true;
         if (successText) {
           successText.textContent = viaBot
             ? 'Мы получили заявку в Telegram. Свяжемся, сверим расписание и подтвердим слот.'
