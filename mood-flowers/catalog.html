@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mood Flowers — букеты с доставкой по Минску</title>
+  <title>Каталог — Mood Flowers</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/site.css">
 </head>
@@ -12,8 +12,8 @@
   <div class="wrap">
     <a class="logo" href="index.html"><img src="img/logo.jpg" alt="Flowers Mood"><span>Flowers Mood</span></a>
     <nav id="site-nav" aria-label="Основная навигация">
-      <a href="index.html" aria-current="page">Главная</a>
-      <a href="catalog.html">Каталог</a>
+      <a href="index.html">Главная</a>
+      <a href="catalog.html" aria-current="page">Каталог</a>
       <a href="delivery.html">Доставка</a>
       <a href="contacts.html">Контакты</a>
     </nav>
@@ -25,59 +25,24 @@
   </div>
 </header>
 
-<div class="wrap hero">
-  <div>
-    <h1>Букеты с настроением и доставкой по Минску</h1>
-    <p>Собираем авторские букеты из свежих цветов к любому поводу: день рождения, свидание, «просто так». Выберите букет, дату и время, остальное сделаем мы.</p>
-    <div class="hero-actions">
-      <a class="btn" href="catalog.html">Выбрать букет</a>
-      <a class="btn ghost" href="#wedding">Предзаказ</a>
-    </div>
-  </div>
-  <div class="ph"><img src="img/post3_osen.jpg" alt="Осенний букет"></div>
-</div>
-
 <section id="catalog">
   <div class="wrap">
-    <h2 class="sec-t">Каталог букетов</h2>
+    <h1 class="sec-t">Каталог букетов</h1>
     <p class="sec-s">Актуальные букеты, цены указаны за готовую композицию</p>
-    <div class="grid grid-4" id="grid" data-limit="4"></div>
-    <p class="catalog-more"><a class="btn" href="catalog.html">Смотреть весь каталог</a></p>
-  </div>
-</section>
-
-<section id="how">
-  <div class="wrap">
-    <h2 class="sec-t">Как заказать</h2>
-    <p class="sec-s">Три простых шага</p>
-    <div class="steps">
-      <div class="step"><b>01</b><h3>Выберите букет</h3><p>В каталоге или пришлите свою идею, соберём индивидуально.</p></div>
-      <div class="step"><b>02</b><h3>Укажите дату и время</h3><p>Доставка по адресу или самовывоз, добавим открытку с вашим текстом.</p></div>
-      <div class="step"><b>03</b><h3>Получите подтверждение</h3><p>Заказ сразу приходит флористу, мы свяжемся с вами для уточнения.</p></div>
+    <div class="toolbar">
+      <div class="filters" id="f">
+        <button class="on" type="button" data-f="all">Все</button>
+        <button type="button" data-f="lo">до 100 BYN</button>
+        <button type="button" data-f="mid">100–150 BYN</button>
+        <button type="button" data-f="hi">от 150 BYN</button>
+      </div>
+      <div class="filters" id="sort" aria-label="Сортировка">
+        <button type="button" data-s="asc">Сначала дешевле</button>
+        <button type="button" data-s="desc">Сначала дороже</button>
+      </div>
     </div>
-  </div>
-</section>
-
-<section id="wedding">
-  <div class="wrap">
-    <h2 class="sec-t">Свадебная флористика и предзаказ</h2>
-    <p class="sec-s">Букеты невесты, оформление и заранее забронированные букеты к праздникам</p>
-    <div class="feat">
-      <div class="it"><div class="ph"><img src="img/post6_svadebny_sezon.jpg" alt=""></div><div class="t"><h3>Свадебный сезон</h3><p>Букет невесты, бутоньерки и флористика для вашего дня.</p><button class="btn" type="button" onclick="openOrder('Свадебная флористика (консультация)')">Обсудить свадьбу</button></div></div>
-      <div class="it"><div class="ph"><img src="img/post2_predzakaz.jpg" alt=""></div><div class="t"><h3>Предзаказ к празднику</h3><p>Забронируйте букет заранее к важной дате, чтобы не переживать в последний момент.</p><button class="btn" type="button" onclick="openOrder('Предзаказ букета')">Оформить предзаказ</button></div></div>
-      <div class="it"><div class="ph"><img src="img/post4_noty_oseni.jpg" alt=""></div><div class="t"><h3>Ноты осени</h3><p>Сезонные композиции и корзины в тёплых осенних оттенках.</p><button class="btn" type="button" onclick="openOrder('Осенняя композиция')">Заказать</button></div></div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="deliv">
-      <h2 class="sec-t">Доставка</h2>
-      <p class="sec-s">Доставка 15 BYN в пределах МКАД. Осуществляется в удобное Вам время. Бесплатная доставка при заказе на сумму от 180 BYN.</p>
-      <p class="note">Самовывоз: Ольшевского, 13 5 · ПН-СБ 9:00-21:00, ВС 10:00-21:00</p>
-      <p class="catalog-more"><a class="btn" href="delivery.html">Подробнее о доставке</a></p>
-    </div>
+    <div class="grid" id="grid"></div>
+    <p class="empty" id="empty">В этой категории букетов пока нет. Напишите нам, соберём под ваш бюджет.</p>
   </div>
 </section>
 
