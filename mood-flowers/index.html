@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mood Flowers — букеты с доставкой по Минску</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#f6f5ec;--blush:#e3e8dc;--rose:#6b7d61;--rosed:#52644a;--ink:#3a4535;--muted:#7a8474}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Manrope,system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+h1,h2,h3,.logo{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;line-height:1.15}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.btn{display:inline-block;border:0;cursor:pointer;background:var(--rose);color:#fff;font:600 14px Manrope,sans-serif;letter-spacing:.04em;padding:12px 22px;border-radius:40px;text-decoration:none;transition:.2s}
+.btn:hover{background:var(--rosed)}.btn.ghost{background:transparent;color:var(--rosed);border:1px solid var(--rose)}
+header{position:sticky;top:0;z-index:20;background:rgba(246,245,236,.92);backdrop-filter:blur(8px);border-bottom:1px solid #dde3d6}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
+.logo{font-size:26px;text-decoration:none;white-space:nowrap}.phone{display:none;font-size:13px;color:var(--muted);margin-right:14px}
+nav a{font-size:14px;text-decoration:none;margin:0 12px;color:var(--muted)}nav{display:none}
+.hero{display:grid;gap:28px;padding:32px 20px 56px}
+.hero h1{font-size:44px}.hero p{color:var(--muted);margin:16px 0 26px;font-size:17px}
+.hero .ph{border-radius:200px 200px 24px 24px;overflow:hidden;aspect-ratio:4/5}
+section{padding:56px 0}.sec-t{font-size:36px;text-align:center;margin-bottom:10px}.sec-s{text-align:center;color:var(--muted);margin-bottom:32px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:28px}
+.filters button{border:1px solid #d3dbcc;background:#fff;color:var(--ink);padding:9px 18px;border-radius:30px;font:500 14px Manrope;cursor:pointer}
+.filters button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.card{background:#fff;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 6px 24px rgba(60,80,50,.08)}
+.card .ph{aspect-ratio:3/4}.card .b{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card h3{font-size:20px}.card .d{font-size:13px;color:var(--muted);flex:1}.card .pr{font-weight:600;color:var(--rosed);font-size:17px}
+.card .btn{padding:10px;text-align:center;font-size:13px}
+.empty{text-align:center;color:var(--muted);padding:30px;display:none}
+.steps{display:grid;gap:18px}.step{background:#fff;border-radius:18px;padding:26px}
+.step b{font-family:"Cormorant Garamond",serif;font-size:42px;color:var(--rose)}.step h3{font-size:22px;margin:4px 0}
+.step p,.note{color:var(--muted);font-size:15px}
+.deliv{background:var(--blush);border-radius:24px;padding:36px 24px;text-align:center}
+.ph-tag{display:inline-block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;background:#fff3c4;color:#7a6200;padding:2px 8px;border-radius:6px;margin-left:6px}
+.feat{display:grid;gap:18px}.feat .it{background:#fff;border-radius:22px;overflow:hidden}
+.feat .ph{aspect-ratio:4/5}.feat .t{padding:22px}.feat h3{font-size:26px;margin-bottom:8px}.feat p{color:var(--muted);font-size:15px;margin-bottom:14px}
+footer{background:var(--ink);color:#eadbd6;padding:44px 0 60px;font-size:14px}footer .logo{color:#fff;font-size:30px}
+footer .cols{display:grid;gap:18px;margin-top:18px}footer a{color:#fff}
+.modal{position:fixed;inset:0;background:rgba(25,35,20,.5);display:none;align-items:flex-end;justify-content:center;z-index:50}
+.modal.open{display:flex}.box{background:var(--cream);width:100%;max-width:520px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:26px 22px}
+.box h3{font-size:28px;margin-bottom:14px}.x{float:right;background:none;border:0;font-size:26px;cursor:pointer;color:var(--muted)}
+label{display:block;font-size:13px;color:var(--muted);margin:12px 0 4px}
+input,select,textarea{width:100%;padding:11px 13px;border:1px solid #d3dbcc;border-radius:12px;font:15px Manrope;background:#fff;color:var(--ink)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.radio{display:flex;gap:16px;margin-top:4px}.radio label{display:flex;gap:6px;align-items:center;margin:0;color:var(--ink);font-size:14px}.radio input{width:auto}
+.ok{text-align:center;padding:20px 0;display:none}.ok .ic{font-size:48px;color:var(--rose)}.tg{margin-top:14px;background:#e8f3fb;color:#2a6a96;padding:12px;border-radius:12px;font-size:13px}
+.mk{position:fixed;left:10px;bottom:10px;z-index:60;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:rgba(58,69,53,.8);color:#fff;padding:4px 10px;border-radius:20px}
+@media(min-width:760px){nav{display:block}.phone{display:inline}.grid{grid-template-columns:repeat(3,1fr);gap:22px}.steps,.feat{grid-template-columns:repeat(3,1fr)}footer .cols{grid-template-columns:repeat(3,1fr)}.modal{align-items:center}.box{border-radius:24px}}
+@media(min-width:1024px){.hero{grid-template-columns:1.1fr 1fr;align-items:center;padding:56px 20px 80px}.hero h1{font-size:68px}.grid{grid-template-columns:repeat(5,1fr)}.feat{grid-template-columns:repeat(3,1fr)}}
+.logo{display:flex;align-items:center;gap:10px}.logo img{width:44px;height:44px;border-radius:50%;flex:none}footer .logo img{width:64px;height:64px}
+.dgrid{display:grid;gap:14px;text-align:left;margin-top:18px}.dgrid div{background:#fff;border-radius:16px;padding:18px}.dgrid b{color:var(--rosed)}
+.ct{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}.ct a{font-size:12px;padding:5px 11px;border-radius:20px;background:var(--rose);color:#fff;text-decoration:none}
+.sum{margin-top:14px;background:#fff;border-radius:12px;padding:12px;font-size:14px}
+@media(min-width:760px){.dgrid{grid-template-columns:repeat(3,1fr)}}
+</style></head><body>
+<header><div class="wrap"><a class="logo" href="#"><img src="img/logo.jpg" alt="Flowers Mood"><span>Flowers Mood</span></a>
+<nav><a href="#catalog">Каталог</a><a href="#how">Как заказать</a><a href="#delivery">Доставка</a><a href="#wedding">Свадьбы</a></nav>
+<div><a class="phone" href="tel:+375293757817">+375 29 375-78-17</a><button class="btn" onclick="openOrder()">Заказать</button></div></div></header>
+
+<div class="wrap hero"><div><h1>Букеты с настроением и доставкой по Минску</h1>
+<p>Собираем авторские букеты из свежих цветов к любому поводу: день рождения, свидание, «просто так». Выберите букет, дату и время, остальное сделаем мы.</p>
+<a class="btn" href="#catalog">Выбрать букет</a> <a class="btn ghost" href="#wedding">Предзаказ</a></div>
+<div class="ph"><img src="img/post3_osen.jpg" alt="Осенний букет"></div></div>
+
+<section id="catalog"><div class="wrap"><h2 class="sec-t">Каталог букетов</h2><p class="sec-s">Актуальные букеты, цены указаны за готовую композицию</p>
+<div class="filters" id="f"><button class="on" data-f="all">Все</button><button data-f="lo">до 100 BYN</button><button data-f="mid">100–150 BYN</button><button data-f="hi">от 150 BYN</button></div>
+<div class="grid" id="grid"></div><p class="empty" id="empty">В этой категории букетов пока нет. Напишите нам, соберём под ваш бюджет.</p></div></section>
+
+<section id="how"><div class="wrap"><h2 class="sec-t">Как заказать</h2><p class="sec-s">Три простых шага</p><div class="steps">
+<div class="step"><b>01</b><h3>Выберите букет</h3><p>В каталоге или пришлите свою идею, соберём индивидуально.</p></div>
+<div class="step"><b>02</b><h3>Укажите дату и время</h3><p>Доставка по адресу или самовывоз, добавим открытку с вашим текстом.</p></div>
+<div class="step"><b>03</b><h3>Получите подтверждение</h3><p>Заказ сразу приходит флористу, мы свяжемся с вами для уточнения.</p></div></div></div></section>
+
+<section id="delivery"><div class="wrap"><div class="deliv"><h2 class="sec-t">Доставка</h2><div class="dgrid"><div><b>Доставка 15 BYN</b> в пределах МКАД.<br>Осуществляется в удобное Вам время.<br><br><b>Бесплатная доставка</b> при заказе на сумму от 180 BYN.</div>
+<div><b>За пределы МКАД</b><br>Стоимость доставки согласовывается отдельно для каждого адреса и оплачивается по согласованию с менеджером не зависимо от суммы Вашего заказа.</div>
+<div><b>Самовывоз</b><br>Ольшевского, 13 5<br>ПН-СБ 9:00-21:00<br>ВС 10:00-21:00</div></div></div></div></section>
+
+<section id="wedding"><div class="wrap"><h2 class="sec-t">Свадебная флористика и предзаказ</h2><p class="sec-s">Букеты невесты, оформление и заранее забронированные букеты к праздникам</p><div class="feat">
+<div class="it"><div class="ph"><img src="img/post6_svadebny_sezon.jpg" alt=""></div><div class="t"><h3>Свадебный сезон</h3><p>Букет невесты, бутоньерки и флористика для вашего дня.</p><button class="btn" onclick="openOrder('Свадебная флористика (консультация)')">Обсудить свадьбу</button></div></div>
+<div class="it"><div class="ph"><img src="img/post2_predzakaz.jpg" alt=""></div><div class="t"><h3>Предзаказ к празднику</h3><p>Забронируйте букет заранее к важной дате, чтобы не переживать в последний момент.</p><button class="btn" onclick="openOrder('Предзаказ букета')">Оформить предзаказ</button></div></div>
+<div class="it"><div class="ph"><img src="img/post4_noty_oseni.jpg" alt=""></div><div class="t"><h3>Ноты осени</h3><p>Сезонные композиции и корзины в тёплых осенних оттенках.</p><button class="btn" onclick="openOrder('Осенняя композиция')">Заказать</button></div></div>
+</div></div></section>
+
+<footer><div class="wrap"><div class="logo"><img src="img/logo.jpg" alt="Flowers Mood"><span>Flowers Mood</span></div><div class="cols">
+<div>Instagram: <a href="https://www.instagram.com/mood_flowers_minsk/" target="_blank" rel="noopener">@mood_flowers_minsk</a><br><br><br>Самовывоз: Ольшевского, 13 5<br>ПН-СБ 9:00-21:00<br>ВС 10:00-21:00</div>
+<div><a href="tel:+375293757817">+375 29 375-78-17</a><div class="ct"><a href="https://t.me/+375293757817" target="_blank">Telegram</a><a href="viber://chat?number=%2B375293757817">Viber</a><a href="https://wa.me/375293757817" target="_blank">WhatsApp</a></div></div>
+<div><a href="tel:+375445940149">+375 44 594-01-49</a><div class="ct"><a href="https://t.me/+375445940149" target="_blank">Telegram</a><a href="viber://chat?number=%2B375445940149">Viber</a><a href="https://wa.me/375445940149" target="_blank">WhatsApp</a></div></div></div></div></footer>
+
+<div class="modal" id="m"><div class="box"><button class="x" onclick="closeOrder()">×</button>
+<form id="form"><h3>Оформление заказа</h3>
+<label>Букет</label><input id="bq" required>
+<div class="row"><div><label>Дата</label><input type="date" id="dt" required></div><div><label>Время</label><select required><option>09:00–12:00</option><option>12:00–15:00</option><option>15:00–18:00</option><option>18:00–21:00</option></select></div></div>
+<label>Получение</label><div class="radio"><label><input type="radio" name="dl" value="d" checked> Доставка</label><label><input type="radio" name="dl" value="p"> Самовывоз</label></div>
+<div id="zone"><label>Зона доставки</label><select name="zone"><option value="in">В пределах МКАД</option><option value="out">За пределами МКАД</option></select></div><p class="note" id="pick" style="display:none;margin-top:8px">Самовывоз: Ольшевского, 13 5 · ПН-СБ 9:00-21:00, ВС 10:00-21:00</p>
+<div id="addr"><label>Адрес доставки</label><input placeholder="Улица, дом, квартира"></div>
+<div class="row"><div><label>Ваше имя</label><input required></div><div><label>Телефон</label><input type="tel" required placeholder="+375"></div></div>
+<label>Текст открытки</label><textarea rows="2" placeholder="Необязательно"></textarea>
+<div class="sum" id="sum"></div><button class="btn" style="width:100%;margin-top:18px">Отправить заказ</button></form>
+<div class="ok" id="ok"><div class="ic">✿</div><h3>Заказ принят, мы свяжемся с вами</h3><p class="note">Спасибо! Флорист уже видит ваш заказ.</p>
+<div class="tg">✈ Заказ мгновенно приходит в Telegram магазина (в макете симуляция, данные никуда не отправляются)</div>
+<button class="btn ghost" style="margin-top:16px" onclick="closeOrder()">Закрыть</button></div></div></div>
+<div class="mk">Макет</div>
+<script>
+const B=[["dm_photo_1","Нежность в розовом","Пионовидные розы, гвоздики, хризантемы и эустома в розовой упаковке",130],
+["dm_photo_2","Персиковое облако","Белые хризантемы, персиковые гвоздики и альстромерии",70],
+["dm_photo_3","Розовый зефир","Розовые гвоздики и белые хризантемы",65],
+["dm_photo_4","Белая свежесть","Белые хризантемы-помпоны и альстромерии",90],
+["dm_photo_5","Классика страсти","Красные розы в крафтовой упаковке",100],
+["dm_photo_6","Утренний сад","Белые хризантемы и розовые альстромерии",100],
+["dm_photo_7","Французский шёлк","Пудровые французские розы в крафте",115],
+["dm_photo_8","Персиковый шёпот","Пионовидные розы с эвкалиптом в кремовой упаковке",70],
+["dm_photo_9","Ванильный крем","Кремовые розы, гвоздики, хризантемы и эвкалипт",80],
+["dm_photo_10","Розовая мечта","Пионовидные розы, хризантемы и эвкалипт",70]];
+const g=document.getElementById('grid');
+g.innerHTML=B.map(b=>`<div class="card" data-p="${b[3]}"><div class="ph"><img loading="lazy" src="img/${b[0]}.jpg" alt="${b[1]}"></div><div class="b"><h3>${b[1]}</h3><div class="d">${b[2]}</div><div class="pr">${b[3]} BYN</div><button class="btn" onclick="openOrder('${b[1]} — ${b[3]} BYN')">Заказать</button></div></div>`).join('');
+document.getElementById('f').onclick=e=>{const f=e.target.dataset.f;if(!f)return;document.querySelectorAll('#f button').forEach(x=>x.classList.toggle('on',x===e.target));let n=0;
+document.querySelectorAll('.card').forEach(c=>{const p=+c.dataset.p,s=f=='all'||(f=='lo'&&p<100)||(f=='mid'&&p>=100&&p<=150)||(f=='hi'&&p>150);c.style.display=s?'':'none';n+=s});document.getElementById('empty').style.display=n?'none':'block'};
+const m=document.getElementById('m'),fm=document.getElementById('form'),ok=document.getElementById('ok');
+function openOrder(n){fm.reset();fm.style.display='';ok.style.display='none';document.getElementById('bq').value=n||'';document.getElementById('dt').min=new Date().toISOString().slice(0,10);calc();m.classList.add('open')}
+function closeOrder(){m.classList.remove('open')}
+m.onclick=e=>{if(e.target===m)closeOrder()};
+function calc(){const p=fm.dl.value=='p',v=+((document.getElementById('bq').value.match(/(\d+) BYN/)||[])[1]||0);
+['addr','zone'].forEach(i=>document.getElementById(i).style.display=p?'none':'');document.getElementById('pick').style.display=p?'':'none';
+let d=p?'самовывоз, бесплатно':fm.zone.value=='out'?'за МКАД — по согласованию с менеджером':v>=180?'бесплатно (заказ от 180 BYN)':'15 BYN';
+document.getElementById('sum').innerHTML=(v?'Букет: <b>'+v+' BYN</b><br>':'')+'Доставка: <b>'+d+'</b>'+(v&&!p&&fm.zone.value=='in'?'<br>Итого: <b>'+(v+(v>=180?0:15))+' BYN</b>':'')}
+fm.onchange=calc;fm.oninput=calc;
+fm.onsubmit=e=>{e.preventDefault();fm.style.display='none';ok.style.display='block'};
+</script></body></html>
