@@ -1439,6 +1439,24 @@ body.page-inner .site-header:not(.is-scrolled) .header-cta.btn-sm {
   outline-offset: 2px;
 }
 
+.consent-summary {
+  margin: 0.35rem 0 0;
+  padding-left: calc(1.15rem + 0.75rem);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.consent-summary a {
+  color: var(--bronze-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.consent-summary a:hover {
+  color: var(--ink);
+}
+
 .field-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
