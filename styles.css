@@ -248,6 +248,12 @@ p:last-child { margin-bottom: 0; }
   color: var(--ink);
 }
 
+.site-header:not(.is-scrolled) .header-cta.btn-sm:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--cream);
+}
+
 .header-inner {
   width: min(100% - 2rem, var(--max));
   margin-inline: auto;
@@ -292,6 +298,18 @@ p:last-child { margin-bottom: 0; }
 .nav a:hover { color: var(--bronze-deep); }
 
 .header-cta { flex-shrink: 0; }
+
+.header-cta.btn {
+  background: var(--bronze-deep);
+  color: var(--card);
+  border-color: var(--bronze-deep);
+}
+
+.header-cta.btn:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--card);
+}
 
 .nav-toggle {
   display: none;
